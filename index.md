@@ -1,10 +1,6 @@
-\## Gazal Jul 15
-
-\##########################################################################################################
-\## \## Samples \##
-\##########################################################################################################
+## Samples
 initial fastq files smallRNA
-/vol/share/podrabsj_lab/ClaireRiggs/smallRNA_backup/concat/alim_anox_concat_092716
+
 
 10_12d_4hrA.fastq.gz 17_12d_24hrA.fastq.gz 36_4d_4hrA.fastq.gz
 5_12d_t0.fastq.gz 73_20d_2hrR.fastq.gz 101_D2_t0.fastq.gz
@@ -34,32 +30,23 @@ initial fastq files smallRNA
 16_12d_24hrA.fastq.gz 35_4d_4hrA.fastq.gz 51_20d_t0.fastq.gz
 72_20d_2hrR.fastq.gz 98_D2_24hrR.fastq.gz
 
-We want only 4d and 12d out of these, and all timepoints for anoxia- t0,
-4hr anoxia, 24hr anoxia, 2hr recovery, and 24hr recovery? Jason- Yes,
-that\'s correct!
+## Other input files
+1. File for adaptor contamination (.fa/.txt)
+2. Reference genome with mito (GCF_001266775.1_Austrofundulus_limnaeus-1.0_genomic_andMITO.fna)
 
-trimmed files
-/vol/share/podrabsj_lab/ClaireRiggs/smallRNA_backup/trimmed/TrimRes_alim_anox_092716
-File for adaptor contamination
-/vol/share/podrabsj_lab/Amielynn/adapter_contamination_sequences_AR3.txt
-Reference genome with mito
-/disk/bioscratch/Podrab_lab/arom2/Alim_mRNA_diffexp/GCF_001266775.1_Austrofundulus_limnaeus-1.0_genomic_andMITO.fna
+## Install and load software
 
-Old files are here:
-/disk/bioscratch/Podrab_lab/gazal/sRNA_gazal/copied_old_infiles/
+module load R/4.4.0/gcc-12.1.0 
+module load gcc-11.1.0 
+conda create -n fastqc fastqc 
+conda activate fastqc 
+conda install -n multiqc
 
-\##########################################################################################################
-\## \## Install and load software \##
-\##########################################################################################################
+## Terminal multiplexer
 
-module load R/4.4.0/gcc-12.1.0 module load gcc-11.1.0 conda create -n
-fastqc fastqc conda activate fastqc conda install -n fastqc multiqc
+tmux new -s fastqc
 
-Working in terminal multiplexer tmux new -s fastqc
-
-\##########################################################################################################
-\## \## FASTQC \##
-\##########################################################################################################
+## FASTQC 
 
 fastqcr.R
 
@@ -73,9 +60,7 @@ threads=20)
 
 Rscript fastqcr.R
 
-\##########################################################################################################
-\## \## Trimming \##
-\##########################################################################################################
+## Trimming 
 
 module load Biosciences/Trimmomatic/0.39 Old script -threads 6 -phred33
 -trimlog
@@ -95,9 +80,7 @@ SLIDINGWINDOW:5:15 LEADING:20 TRAILING:20 MINLEN:15 done #done
 
 tmux new -s fastqc tmux a -t fastqc
 
-\##########################################################################################################
-\## \## FASTQC \##
-\##########################################################################################################
+## FASTQC 
 
 tmux new -s fastqc tmux a -t fastqc
 
@@ -109,5 +92,14 @@ repos=\"http://cran.us.r-project.org\") library(fastqcr) } else
 \"/disk/bioscratch/Podrab_lab/gazal/sRNA_gazal/trim\",
 qc.dir=\"/disk/bioscratch/Podrab_lab/gazal/sRNA_gazal/fastqc/trim_fastqc\",
 threads=20)
+
+## Contributors
+Gazal Kalyan
+Amie Romney
+Claire Riggs
+Jason Podrabsky
+
+
+
 
 Rscript fastqcr.R
