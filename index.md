@@ -97,9 +97,4 @@ threads=20)
 Gazal Kalyan \
 Amie Romney \
 Claire Riggs \
-Jason Podrabsky \
-
-
-
-
-Rscript fastqcr.R
+Jason Podrabsky 
