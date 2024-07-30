@@ -94,10 +94,10 @@ qc.dir=\"/disk/bioscratch/Podrab_lab/gazal/sRNA_gazal/fastqc/trim_fastqc\",
 threads=20)
 
 ## Contributors
-Gazal Kalyan
-Amie Romney
-Claire Riggs
-Jason Podrabsky
+Gazal Kalyan \
+Amie Romney \
+Claire Riggs \
+Jason Podrabsky \
 
 
 
