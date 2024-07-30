@@ -2,32 +2,32 @@
 initial fastq files smallRNA
 
 
-10_12d_4hrA.fastq.gz 17_12d_24hrA.fastq.gz 36_4d_4hrA.fastq.gz
-5_12d_t0.fastq.gz 73_20d_2hrR.fastq.gz 101_D2_t0.fastq.gz
-18_12d_24hrA.fastq.gz 37_4d_4hrA.fastq.gz 52_20d_t0.fastq.gz
-74_20d_2hrR.fastq.gz 102_D2_t0.fastq.gz 19_12d_2hrR.fastq.gz
-38_4d_4hrA.fastq.gz 53_20d_t0.fastq.gz 76_20d_24hrR.fastq.gz
-104_D2_4hrA.fastq.gz 21_12d_2hrR.fastq.gz 39_4d_24hrA.fastq.gz
-55_20d_t0.fastq.gz 77_20d_24hrR.fastq.gz 108_D2_24hrA.fastq.gz
-2_12d_t0.fastq.gz 40_4d_24hrA.fastq.gz 57_20d_2hrA.fastq.gz
-79_20d_24hrR.fastq.gz 110_D2_2hrR.fastq.gz 22_12d_2hrR.fastq.gz
-41_4d_24hrA.fastq.gz 59_20d_2hrA.fastq.gz 80_20d_24hrR.fastq.gz
-11_12d_4hrA.fastq.gz 23_12d_2hrR.fastq.gz 42_4d_24hrA.fastq.gz
-60_20d_2hrA.fastq.gz 81_D2_t0.fastq.gz 111_D2_2hrR.fastq.gz
-25_12d_24hrR.fastq.gz 43_4d_2hrR.fastq.gz 61_20d_2hrA.fastq.gz
-82_D2_4hrA.fastq.gz 112_D2_24hrR.fastq.gz 28_12d_24hrR.fastq.gz
-44_4d_2hrR.fastq.gz 6_12d_t0.fastq.gz 86_D2_t0.fastq.gz
-1_12d_t0.fastq.gz 29_12d_24hrR.fastq.gz 45_4d_2hrR.fastq.gz
-63_20d_6hrA.fastq.gz 89_D2_4hrA.fastq.gz 114_D2_24hrA.fastq.gz
-30_12d_24hrR.fastq.gz 46_4d_2hrR.fastq.gz 64_20d_6hrA.fastq.gz
-91_D2_4hrA.fastq.gz 118_D2_24hrR.fastq.gz 31_4d_t0.fastq.gz
-47_4d_24hrR.fastq.gz 65_20d_6hrA.fastq.gz 92_D2_24hrA.fastq.gz
-119_D2_24hrR.fastq.gz 32_4d_t0.fastq.gz 48_4d_24hrR.fastq.gz
-67_20d_6hrA.fastq.gz 94_D2_24hrA.fastq.gz 12_12d_4hrA.fastq.gz
-33_4d_t0.fastq.gz 49_4d_24hrR.fastq.gz 70_20d_2hrR.fastq.gz
-96_D2_2hrR.fastq.gz 13_12d_24hrA.fastq.gz 34_4d_t0.fastq.gz
-50_4d_24hrR.fastq.gz 7_12d_4hrA.fastq.gz 97_D2_2hrR.fastq.gz
-16_12d_24hrA.fastq.gz 35_4d_4hrA.fastq.gz 51_20d_t0.fastq.gz
+10_12d_4hrA.fastq.gz 17_12d_24hrA.fastq.gz 36_4d_4hrA.fastq.gz \
+5_12d_t0.fastq.gz 73_20d_2hrR.fastq.gz 101_D2_t0.fastq.gz \
+18_12d_24hrA.fastq.gz 37_4d_4hrA.fastq.gz 52_20d_t0.fastq.gz \
+74_20d_2hrR.fastq.gz 102_D2_t0.fastq.gz 19_12d_2hrR.fastq.gz \
+38_4d_4hrA.fastq.gz 53_20d_t0.fastq.gz 76_20d_24hrR.fastq.gz \
+104_D2_4hrA.fastq.gz 21_12d_2hrR.fastq.gz 39_4d_24hrA.fastq.gz \
+55_20d_t0.fastq.gz 77_20d_24hrR.fastq.gz 108_D2_24hrA.fastq.gz \
+2_12d_t0.fastq.gz 40_4d_24hrA.fastq.gz 57_20d_2hrA.fastq.gz \
+79_20d_24hrR.fastq.gz 110_D2_2hrR.fastq.gz 22_12d_2hrR.fastq.gz \
+41_4d_24hrA.fastq.gz 59_20d_2hrA.fastq.gz 80_20d_24hrR.fastq.gz \
+11_12d_4hrA.fastq.gz 23_12d_2hrR.fastq.gz 42_4d_24hrA.fastq.gz \
+60_20d_2hrA.fastq.gz 81_D2_t0.fastq.gz 111_D2_2hrR.fastq.gz \
+25_12d_24hrR.fastq.gz 43_4d_2hrR.fastq.gz 61_20d_2hrA.fastq.gz \
+82_D2_4hrA.fastq.gz 112_D2_24hrR.fastq.gz 28_12d_24hrR.fastq.gz \
+44_4d_2hrR.fastq.gz 6_12d_t0.fastq.gz 86_D2_t0.fastq.gz \
+1_12d_t0.fastq.gz 29_12d_24hrR.fastq.gz 45_4d_2hrR.fastq.gz \
+63_20d_6hrA.fastq.gz 89_D2_4hrA.fastq.gz 114_D2_24hrA.fastq.gz \
+30_12d_24hrR.fastq.gz 46_4d_2hrR.fastq.gz 64_20d_6hrA.fastq.gz \
+91_D2_4hrA.fastq.gz 118_D2_24hrR.fastq.gz 31_4d_t0.fastq.gz \
+47_4d_24hrR.fastq.gz 65_20d_6hrA.fastq.gz 92_D2_24hrA.fastq.gz \
+119_D2_24hrR.fastq.gz 32_4d_t0.fastq.gz 48_4d_24hrR.fastq.gz \
+67_20d_6hrA.fastq.gz 94_D2_24hrA.fastq.gz 12_12d_4hrA.fastq.gz \
+33_4d_t0.fastq.gz 49_4d_24hrR.fastq.gz 70_20d_2hrR.fastq.gz \
+96_D2_2hrR.fastq.gz 13_12d_24hrA.fastq.gz 34_4d_t0.fastq.gz \
+50_4d_24hrR.fastq.gz 7_12d_4hrA.fastq.gz 97_D2_2hrR.fastq.gz \
+16_12d_24hrA.fastq.gz 35_4d_4hrA.fastq.gz 51_20d_t0.fastq.gz \
 72_20d_2hrR.fastq.gz 98_D2_24hrR.fastq.gz
 
 ## Other input files
@@ -36,11 +36,11 @@ initial fastq files smallRNA
 
 ## Install and load software
 
-module load R/4.4.0/gcc-12.1.0 
-module load gcc-11.1.0 
-conda create -n fastqc fastqc 
-conda activate fastqc 
-conda install -n multiqc
+module load R/4.4.0/gcc-12.1.0  \
+module load gcc-11.1.0  \
+conda create -n fastqc fastqc  \
+conda activate fastqc  \
+conda install -n multiqc \
 
 ## Terminal multiplexer
 
