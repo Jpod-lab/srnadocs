@@ -1,3 +1,5 @@
+{:toc}
+
 ## Samples
 initial fastq files smallRNA
 
