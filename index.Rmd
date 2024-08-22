@@ -442,7 +442,8 @@ Files used:
 3. Reference genome for mitochondria (.fasta) and its index file (.fai)
 4. Genome feature file (.gff) for mitochondrial genome
 
-![](jbrowse/jbrowse_4d_t0.svg){width=100%}
+![](jbrowse/jbrowse_4d_t0.svg)
+<a href="jbrowse/jbrowse_4d_t0.svg" target="_blank"> Click to enlarge</a>
 
 This figure shows mitochondiral genome of 100bp length from 17100 to 17199. On this genome, we see 
 1) the colored basepairs, 2) Genomic features of the mentioned length, 3) Alignments from 4 samples (4d t0 replicates)
