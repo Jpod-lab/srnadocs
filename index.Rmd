@@ -569,6 +569,8 @@ bedtools_txt_pattern <- "bedtools.txt$"
 Set pattern of filenames: these files are searched in the parent_dir recursively.
 Make sure that the parent_dir contains these files and the pattern should be unique to list the files that we need.
 
+Merge results from our samples can be viewed from our [github repo](https://github.com/Jpod-lab/srnadocs/tree/main)
+
 ## Visualizing
 We use the alignments with mitochondrial genome to view the aligned reads.
 
