@@ -259,6 +259,10 @@ formattable(df_stats, list(
 
 ## Alignment
 
+First things first- create a conda environment that has bowtie, samtools, picard, and bedtools.
+
+`conda create -n condabowtie bowtie samtools picard bedtools`
+
 The trimmed reads are aligned to the reference genome using bowtie.
 To analyze reads mapping with mitochondrial genome, we perform the alignment in two steps.
 
@@ -378,14 +382,121 @@ formattable(df_stats, list(
     table.attr = "class=\'table table-condensed\', style=\'width:80%; font-size:90%;\'")
 )
 ```
+Another QC that we could fo with the aligned read is with Picard. The following is the command line to do that:
+
+```
+FILES="/disk/bioscratch/Podrab_lab/gazal/sRNA_gazal/align_with_alim_for_anno/alim_mito_anno/*sorted.bam"
+for f in $FILES
+    do
+        b=`basename $f`
+        echo Converting file $b
+        o="$b.picard.txt"
+        echo Output file is $o
+	picard -Xmx5g CollectAlignmentSummaryMetrics I=$f O=$o R=/disk/bioscratch/Podrab_lab/gazal/sRNA_gazal/copied_old_infiles/GCF_001266775.1_Austrofundulus_limnaeus-1.0_genomic_andMITO.fna
+    done
+#done
+
+```
+
+Before we proceed, we need to sort the sam, convert it into bam and create a bam index (bai).
+This step ensures that we could store the alignments in acceptable binary format that takes less storage space
+and is compatible with subsequent steps.
+
+
+```
+FILES="/disk/bioscratch/Podrab_lab/gazal/sRNA_gazal/align_with_alim_for_anno/alim_mito_anno/*.sam"
+for f in $FILES
+    do
+        b=`basename $f`
+        echo Converting $b to bam
+        o=${b::-4}
+        bam="$o.bam"
+	sortedbam="$b.sorted.bam"
+	
+	echo Tmp file is $bam
+        samtools view -b $f > $bam
+	
+        echo Output files are $sortedbam and its index
+	samtools sort $bam -o $sortedbam
+	samtools index $sortedbam
+	echo Deleting Tmp file $bam 
+	rm $bam 
+    done
+#done
+```
 
 ## Using aligned reads
-**Coming Soon**
+
+We will create three files:
+
+1. Summary information that has read ID, sequence, reference location, and number of alignments.
+2. Exact location, genomic features of the reference location that the reads mapped to via bedtools.
+3. Counting the readcounts from bam files.
+
+```#!/bin/bash
+FILES="/disk/bioscratch/Podrab_lab/gazal/sRNA_gazal/align_with_alim_for_anno/alim_mito_anno/*.bam"
+for f in $FILES
+    do
+        b=`basename $f`
+        echo $b
+        o=${b::-4}
+        o="$o.summary.txt"
+	input_file="$f"
+	output_file="$o.summary.txt"
+
+	# Process the input file with samtools and awk
+	samtools view $f | awk '{print $1, $10, $3, $4, $15}' | sort | uniq > "$output_file"
+	echo "Output file written $output_file"
+    done
+```
+The result is the following data for each file. The sample 1_12d_t0 is shown.
+![](screens/summary_1_12d_t0.png)
+
+```#!/bin/bash
+FILES="/disk/bioscratch/Podrab_lab/gazal/sRNA_gazal/align_with_alim_for_anno/alim_mito_anno/*.bam"
+for f in $FILES
+    do
+        b=`basename $f`
+        echo $b
+        o=${b::-4}
+        bed="$o.bed"
+	out="$o.bedtools.txt"
+	gff="/disk/bioscratch/Podrab_lab/gazal/sRNA_gazal/mito_genome/GCF_001266775.1_Austrofundulus_limnaeus_MITOonly.gff"
+	bedtools intersect -a $f -b $gff -wo -f 1 -bed > $bed
+	awk '!seen[$4]++' $bed > tmp.csv
+	rm $bed
+	awk '{print $4, $21}' tmp.csv > $out
+	rm tmp.csv
+	echo "Output file written $out"
+    done
+
+```
+The result of above command gives us the following data for each file. The sample 1_12d_t0 is shown.
+![](screens/bedtools_1_12d_t0.png)
+
+
+```#!/bin/bash
+FILES="/disk/bioscratch/Podrab_lab/gazal/sRNA_gazal/align_with_alim_for_anno/alim_mito_anno/*.bam"
+for f in $FILES
+    do
+        b=`basename $f`
+        echo $b
+        o=${b::-4}
+        o="$o.readcount.txt"
+        echo Output file is $o
+	# Count unique occurrences of column 10
+	samtools view $f | awk '{print $10}'| sort | uniq -c > "$o"
+	echo "Output written to $o"
+    done
+
+```
+The result of above command gives us the following data for each file. The sample 1_12d_t0 is shown.
+![](screens/readcount_1_12d_t0.png)
 
 ### miRTrace
  Running mirtrace with the following command.
-```
-#!/bin/bash
+
+```#!/bin/bash
 mirtrace qc --species dre --config seq_address.txt
 ```
 
@@ -429,7 +540,34 @@ and their length distributions for each sample.
 ![](sports/Screenshot10_12d_4hrA_graph.png){width=550px}
 
 ## Compiling output files
-**Coming Soon**
+
+At the end, we need to compile all the output files into a single dataframe that can be exported
+to further do downstream processing such as statistics, differential expression, and clustering.
+
+We provide an [R script](scripts/merge_counts_mito.R) that compiles these output files:
+
+1. Annotation: From **sports**- *.mapped_output.txt
+2. Alignment summary: From .bam files with **samtools**- *.summary.txt
+3. Readcount: From .bam files with **samtools** and **awk**- *.readcount.txt
+4. Location: From .bam files with **bedtools**- *.bedtools.txt
+
+In addition, we also need a sample design file (.csv format) that has details about the samples.
+This file makes it easier to do statistical analysis on the data using R packages like 
+DESeq2, ExpressionSet, and EdgeR.
+
+You would alter the following lines in the R script that basically tells the program where these txt files are located.
+
+```{r, eval=FALSE}
+parent_dir <- "D:/PSU_work/smrnaseq/mito_map"
+samples <- "D:/PSU_work/smrnaseq/mito_map/design_samples.csv"
+readcount_txt_pattern <- "sorted.readcount.txt$"
+output_txt_pattern <- "mapped_output.txt$"
+summary_txt_pattern <- "summary.txt$"
+bedtools_txt_pattern <- "bedtools.txt$"
+```
+
+Set pattern of filenames: these files are searched in the parent_dir recursively.
+Make sure that the parent_dir contains these files and the pattern should be unique to list the files that we need.
 
 ## Visualizing
 We use the alignments with mitochondrial genome to view the aligned reads.
