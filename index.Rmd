@@ -12,14 +12,14 @@ output:
 This workflow demonstrates the mitosRNAseq pipeline which identifies several types of
 small RNA from sequencing data from short reads of <50 nt. The following method collects sequence-based 
 counts, sequence locations, genomic features, and annotations. 
-The data we use is from killifish embyros anoxia experiments. 
+The data we use is from killifish embryos anoxia experiments. 
 
-The step-by-step workflow we follow is illistrated below and a 
-detailed method to perform small RNA seq on an academic HPC is decsribed in this document. 
+The step-by-step workflow we follow is illustrated below and a 
+detailed method to perform small RNA seq on an academic HPC is described in this document. 
 
 ![](/home/gazal/Documents/PSU_work/sRNA_gazal/documentation/Figure 1.png)
 
-The following table shows the contents of the file **samples.csv** that contains metadata for our samples.
+The following table shows the contents of the file **samples.csv**, which contains metadata for our samples.
 We start with a total of 40 fastq files.
 
 ### Sample Table
@@ -55,7 +55,7 @@ conda install -n multiqc
 **tmux**
 
 For almost every long-ish process, 
-we use tmux to run tasks in a detached terminal window that can keep running if we want to log out or if we accidently log out.
+we use tmux to run tasks in a detached terminal window that can keep running if we want to log out or if we accidentally log out.
 ```
 tmux new -s fastqc
 ```
@@ -206,7 +206,7 @@ Rscript fastqcr.R
 
 ### FastQC Output
 
-Plots for each FASTQC metric after trimming is shown below. 
+Plots for each FASTQC metric after trimming are shown below. 
 All the adapters were removed and overall quality looks better.
 
 **General Statistics from multiqc**
@@ -278,7 +278,7 @@ bowtie-index almitogenome.fa
 
 ### Alignment with genome
 
-The alignment was done on the trimmed reads from previous section.
+The alignment was done on the trimmed reads from the previous section.
 
 ```
 #!/bin/bash
@@ -314,7 +314,7 @@ The following stats show alignment QC.
 ![Bowtie Alignment Stats with Genome](alignment/genome/bowtie1_alignment.png){width=550px}
 
 This table shows the number of reads aligned in each sample (MillionAlignedReads). 
-It also shows the number of aligments of various reads that includes multimapped reads (MillionMappedReads).
+It also shows the number of alignments of various reads that include multimapped reads (MillionMappedReads).
 
 ```{r echo=FALSE, results='asis', warning=FALSE}
 library(readr)
@@ -331,7 +331,7 @@ formattable(df_stats, list(
 ```
 ### Alignment with mitochondria
 
-The alignment was done on the trimmed reads from previous section.
+The alignment was done on the trimmed reads from the previous section.
 
 The following stats show alignment QC. 
 
@@ -367,7 +367,7 @@ for f in $FILES
 ![Bowtie Alignment Stats with Mitochondrial Genome](alignment/mitochondria/bowtie1_alignment.png){width=550px}
 
 This table shows the number of reads aligned in each sample (MillionAlignedReads). 
-It also shows the number of aligments of various reads that includes multimapped reads (MillionMappedReads).
+It also shows the number of alignments of various reads that include multimapped reads (MillionMappedReads).
 
 ```{r echo=FALSE, results='asis', warning=FALSE}
 library(readr)
@@ -398,8 +398,8 @@ for f in $FILES
 
 ```
 
-Before we proceed, we need to sort the sam, convert it into bam and create a bam index (bai).
-This step ensures that we could store the alignments in acceptable binary format that takes less storage space
+Before we proceed, we need to sort the sam, convert it into bam, and create a bam index (bai).
+This step ensures that we can store the alignments in an acceptable binary format that takes less storage space
 and is compatible with subsequent steps.
 
 
@@ -416,7 +416,7 @@ for f in $FILES
 	echo Tmp file is $bam
         samtools view -b $f > $bam
 	
-        echo Output files are $sortedbam and its index
+        echo Output files are $sortedbam and their index
 	samtools sort $bam -o $sortedbam
 	samtools index $sortedbam
 	echo Deleting Tmp file $bam 
@@ -430,7 +430,7 @@ for f in $FILES
 We will create three files:
 
 1. Summary information that has read ID, sequence, reference location, and number of alignments.
-2. Exact location, genomic features of the reference location that the reads mapped to via bedtools.
+2. Exact location, and genomic features of the reference location that the reads mapped to via bedtools.
 3. Counting the readcounts from bam files.
 
 ```#!/bin/bash
@@ -471,7 +471,7 @@ for f in $FILES
     done
 
 ```
-The result of above command gives us the following data for each file. The sample 1_12d_t0 is shown.
+The result of the above command gives us the following data for each file. The sample 1_12d_t0 is shown.
 ![](screens/bedtools_1_12d_t0.png)
 
 
@@ -490,7 +490,7 @@ for f in $FILES
     done
 
 ```
-The result of above command gives us the following data for each file. The sample 1_12d_t0 is shown.
+The result of the above command gives us the following data for each file. The sample 1_12d_t0 is shown.
 ![](screens/readcount_1_12d_t0.png)
 
 ### miRTrace
@@ -572,7 +572,7 @@ Make sure that the parent_dir contains these files and the pattern should be uni
 Merge results from our samples can be viewed from our [github repo](https://github.com/Jpod-lab/srnadocs/tree/main)
 
 ## Visualizing
-We use the alignments with mitochondrial genome to view the aligned reads.
+We use the alignments with the mitochondrial genome to view the aligned reads.
 
 Jbrowse is used to explore alignments.
 
@@ -585,6 +585,6 @@ Files used:
 ![](jbrowse/jbrowse_4d_t0.svg)
 <a href="jbrowse/jbrowse_4d_t0.svg" target="_blank"> Click to enlarge</a>
 
-This figure shows mitochondiral genome of 100bp length from 17100 to 17199. On this genome, we see 
+This figure shows mitochondrial genome of 100bp length from 17100 to 17199. On this genome, we see 
 1) the colored basepairs, 2) Genomic features of the mentioned length, 3) Alignments from 4 samples (4d t0 replicates)
 that show reads aligned to the genome colored by strand while also showing the coverage histogram in grey. 
